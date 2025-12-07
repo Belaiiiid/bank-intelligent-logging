@@ -1,0 +1,97 @@
+<nav class="dashboard-nav">
+  <div class="nav-brand">Bank Intelligent Logging</div>
+  <div class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+    <a routerLink="/logging" routerLinkActive="active" class="nav-link">Logging</a>
+  </div>
+  <div class="user-info">
+    <span class="welcome">Welcome, {{ currentUser }}!</span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="dashboard-header">
+  <div class="dashboard-controls">
+    <select [(ngModel)]="selectedTimeframe" (change)="onTimeframeChange()" class="timeframe-select">
+      <option *ngFor="let tf of timeframes" [value]="tf">{{ tf }}</option>
+    </select>
+    <button class="refresh-btn" (click)="refreshData()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">🔄 Refresh</span>
+      <span *ngIf="isLoading">⏳ Loading...</span>
+    </button>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="label">Total Transactions</div>
+    <div class="value">{{ kpis.total }}</div>
+    <div class="trend">+12% from last period</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Anomalies Detected</div>
+    <div class="value warn">{{ kpis.anomalies }}</div>
+    <div class="trend" [class.alert]="kpis.anomalies > 5">⚠️ High alert</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Total Volume</div>
+    <div class="value">${{ kpis.volume | number:'1.2-2' }}</div>
+    <div class="trend">+8.5% from last period</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Average Amount</div>
+    <div class="value">${{ kpis.avgAmount | number:'1.2-2' }}</div>
+    <div class="trend">+2.1% from last period</div>
+  </div>
+</div>
+
+<div class="dashboard-content">
+  <div class="chart-section">
+    <h3>Transaction Overview</h3>
+    <div class="chart-placeholder">
+      <p>📊 Transaction volume chart would appear here</p>
+      <p>In a real app, this would show interactive charts</p>
+    </div>
+  </div>
+  
+  <div class="transactions-section">
+    <h3>Recent Transactions</h3>
+    <div class="transactions-table" *ngIf="txs.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Timestamp</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of txs.slice(0, 10)">
+            <td>#{{ tx.id }}</td>
+            <td class="amount">${{ tx.amount | number:'1.2-2' }}</td>
+            <td>{{ tx.description }}</td>
+            <td>{{ tx.timestamp | date:'short' }}</td>
+            <td>
+              <span [class]="tx.is_anomaly ? 'anomaly' : 'normal'">
+                {{ tx.is_anomaly ? '🚨 ANOMALY' : '✅ Normal' }}
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="View Details">👁️</button>
+              <button class="action-btn" title="Investigate" *ngIf="tx.is_anomaly">🔍</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="no-data" *ngIf="txs.length === 0">
+      <h3>No Transactions Yet</h3>
+      <p>Transactions will appear here once they are created via the API</p>
+      <p><strong>API Endpoint:</strong> POST /api/transactions</p>
+    </div>
+  </div>
+</div>

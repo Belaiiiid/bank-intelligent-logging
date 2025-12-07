@@ -1,0 +1,334 @@
+/* Modern Logging Component Styles */
+.logging-container {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  padding: 32px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.logging-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 32px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logging-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.logging-header h2 {
+  color: white;
+  margin: 0 0 16px 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logging-header p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.logging-toolbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 24px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.level-select {
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.level-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.level-select option {
+  background: #2c3e50;
+  color: white;
+}
+
+.search-btn {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.search-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.logs-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.logs-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.logs-table th,
+.logs-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logs-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  color: white;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logs-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logs-table .timestamp {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+}
+
+.logs-table .level {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  text-align: center;
+  min-width: 80px;
+  display: inline-block;
+}
+
+.logs-table .level.error {
+  background: rgba(231, 76, 60, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.logs-table .level.warning {
+  background: rgba(243, 156, 18, 0.2);
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.logs-table .level.info {
+  background: rgba(52, 152, 219, 0.2);
+  color: #74b9ff;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.logs-table .level.debug {
+  background: rgba(149, 165, 166, 0.2);
+  color: #b2bec3;
+  border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+.logs-table .message {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 400px;
+  word-break: break-word;
+}
+
+.logs-table .source {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.no-logs {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.no-logs h3 {
+  color: white;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.no-logs p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logging-container {
+    padding: 20px;
+  }
+  
+  .logging-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input,
+  .level-select,
+  .search-btn {
+    width: 100%;
+  }
+  
+  .logs-table {
+    font-size: 12px;
+  }
+  
+  .logs-table th,
+  .logs-table td {
+    padding: 12px 8px;
+  }
+  
+  .logs-table .message {
+    max-width: 200px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logging-header,
+.logging-toolbar,
+.logs-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.logging-toolbar {
+  animation-delay: 0.1s;
+}
+
+.logs-container {
+  animation-delay: 0.2s;
+}

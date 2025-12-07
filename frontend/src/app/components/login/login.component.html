@@ -1,0 +1,50 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Bank Intelligent Logging</h1>
+      <p>Sign in to access your dashboard</p>
+    </div>
+    
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username"
+          [(ngModel)]="credentials.username" 
+          name="username"
+          placeholder="Enter username"
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password"
+          [(ngModel)]="credentials.password" 
+          name="password"
+          placeholder="Enter password"
+          required>
+      </div>
+      
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      
+      <button 
+        type="submit" 
+        class="login-btn"
+        [disabled]="isLoading || !credentials.username || !credentials.password">
+        <span *ngIf="!isLoading">Sign In</span>
+        <span *ngIf="isLoading">Signing In...</span>
+      </button>
+    </form>
+    
+    <div class="demo-credentials">
+      <p><strong>Demo Credentials:</strong></p>
+      <p>Username: admin</p>
+      <p>Password: admin</p>
+    </div>
+  </div>
+</div>
