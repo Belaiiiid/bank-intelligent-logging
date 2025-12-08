@@ -59,7 +59,7 @@ bank-intelligent-logging/
    ├─ package.json
    ├─ angular.json
    ├─ tsconfig*.json
-   └─ src/...
+   └─ src/
 ```
 
 ## Prerequisites
@@ -229,12 +229,3 @@ For local development, Elasticsearch security is disabled. Do not use these sett
 - PostgreSQL, Redis
 - Logstash, Elasticsearch, Kibana (Elastic Stack)
 - Angular 18, Nginx
-
-## License
-
-MIT (or your preferred license). Add a LICENSE file if distributing.
-
-## Contributing
-
-- Issues and PRs are welcome. Please format code and keep configs minimal/secure.
-- For large changes, open an issue first to discuss the approach.
