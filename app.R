@@ -14,9 +14,13 @@ library(DT)
 # Data Loading and Preparation
 # ==============================================================================
 
-# Load data
-gouvernorat_data <- read.csv("par_gouvernorat.csv", stringsAsFactors = FALSE)
-region_data <- read.csv("par_region.csv", stringsAsFactors = FALSE)
+# Load data with error handling
+tryCatch({
+  gouvernorat_data <- read.csv("par_gouvernorat.csv", stringsAsFactors = FALSE)
+  region_data <- read.csv("par_region.csv", stringsAsFactors = FALSE)
+}, error = function(e) {
+  stop("Error loading data files. Please ensure 'par_gouvernorat.csv' and 'par_region.csv' are in the same directory as app.R.\nError: ", e$message)
+})
 
 # ==============================================================================
 # Custom CSS for Modern Design
@@ -502,12 +506,12 @@ ui <- dashboardPage(
       icon("chart-line"),
       " Poverty Analysis Tunisia"
     ),
-    titleWidth = 350
+    titleWidth = 300
   ),
   
   # Sidebar Menu
   dashboardSidebar(
-    width = 350,
+    width = 300,
     sidebarMenu(
       id = "tabs",
       menuItem("Dashboard Overview", tabName = "dashboard", icon = icon("dashboard")),
@@ -750,7 +754,13 @@ server <- function(input, output, session) {
     if (input$regionFilter == "All") {
       gouvernorat_data
     } else {
-      gouvernorat_data %>% filter(Region == input$regionFilter)
+      filtered <- gouvernorat_data %>% filter(Region == input$regionFilter)
+      # Return all data if filter results in empty dataset
+      if (nrow(filtered) == 0) {
+        gouvernorat_data
+      } else {
+        filtered
+      }
     }
   })
   
